@@ -8,8 +8,8 @@ export async function onUpdate(data, botApi) {
         const text = message.text.trim().toLowerCase();
         const userName = message.from ? message.from.first_name : "الغالي";
 
-        // 1. التفاعلات التلقائية (💘🌚💋💗)
-        const myReactions = ["💘", "🌚", "💋", "💗"];
+        // 1. التفاعلات التلقائية
+        const myReactions = ["💘", "✨", "🤝", "💗"];
         const randomReaction = myReactions[Math.floor(Math.random() * myReactions.length)];
         await botApi.setMessageReaction(chatId, message_id, randomReaction).catch(() => {});
 
@@ -18,7 +18,6 @@ export async function onUpdate(data, botApi) {
             const chars = "abcdefghijklmnopqrstuvwxyz0123456789_";
             let foundUsers = [];
             
-            // توليد 5 يوزرات سداسية/سباعية عشوائية كنموذج فحص سريع
             for (let i = 0; i < 5; i++) {
                 let len = Math.floor(Math.random() * 2) + 6; // 6 أو 7
                 let user = "";
@@ -26,14 +25,14 @@ export async function onUpdate(data, botApi) {
                 foundUsers.push(`\`${user}\``);
             }
 
-            const huntText = `🚀 **جارِ الصيد يا وحش الناصرية...**\n\n🎯 يوزرات مقترحة للفحص (سداسي/سباعي):\n${foundUsers.join('\n')}\n\n💡 استخدم سكربت البايثون اللي عندك لفحص المتاح منها هسة!`;
+            const huntText = `🚀 **جارِ توليد المقترحات يا مقتدى...**\n\n🎯 يوزرات مقترحة للفحص (سداسي/سباعي):\n${foundUsers.join('\n')}\n\n💡 استخدم سكربت البايثون الخاص بك لفحص المتاح منها الآن بنجاح.`;
             await botApi.sendMessage(chatId, huntText, "Markdown", message_id);
             return;
         }
 
         // 3. واجهة البداية /start
         if (text === '/start') {
-            const welcomeText = `✨ **هلا بيك يا بعد روحي مقتدى نورت** ✨\n\nأنا بوتك المطور بذكاء GROK واللمسة العراقية.\n\n📌 **شنو اگدر أسوي؟**\n• أرد عليك بلهجتنا (سولف وياي).\n• أتفاعل وية رسائلك تلقائياً 🌚.\n• أساعدك بصيد اليوزرات (اكتب 'صيد').\n• أصمم لك أكواد وهاكات 🚀.\n\nتفضل اسأل أي شي يا غالي 💋.`;
+            const welcomeText = `✨ **أهلاً بك يا مقتدى، نورت بحضورك** ✨\n\nأنا مساعدك الذكي المطور بلهجة عراقية واعية ورؤية برمجية متقدمة.\n\n📌 **أبرز الخدمات المتاحة:**\n• نقاشات واعية وإجابات ذكية بلهجتنا الطيبة.\n• تفاعل تلقائي ومدروس مع رسائلك.\n• اقتراح يوزرات للصيد (اكتب 'صيد').\n• دعم وتطوير أكواد البرمجة والأتمتة.\n\nتفضل بطرح استفسارك، وأنا بكامل الجاهزية لمساعدتك.`;
             await botApi.sendMessage(chatId, welcomeText, "Markdown", message_id);
             return;
         }
@@ -52,11 +51,12 @@ export async function onUpdate(data, botApi) {
                 messages: [
                     { 
                         role: "system", 
-                        content: `أنت 'مساعد مقتدى الشخصي'. عراقي من الناصرية، مرح جداً، خفيف دم، وحنون.
-                        - رد بلهجة عراقية قحة (يا بعد روحي، تدلل عيني، نورت يا وحش).
-                        - أنت خبير برمجة بايثون وصناعة هاكات ألعاب (مثل سابوي وتيك توك).
-                        - إذا سألك مقتدى عن الصيد، شجعه وأعطيه نصائح احترافية.
-                        - استخدم إيموجيات (🌚, 💋, 🚀, 🔥) بكثرة.` 
+                        content: `أنت 'مساعد مقتدى الشخصي'. شخصية واعية، مثقفة، ومحترمة جداً من الناصرية. 
+                        - تتحدث بلهجة عراقية فصيحة، مهذبة ودافئة (مثل: "يا بعد روحي"، "تدلل عيني"، "نورت يا غالي").
+                        - تبتعد عن الابتذال أو الهزل المفرط، وتتسم إجاباتك بالرزانة والعمق والمعرفة.
+                        - تمتلك خبرة برمجية عالية جداً في لغة بايثون، الذكاء الاصطناعي، والأتمتة (Automation).
+                        - إذا استشارك مقتدى في البرمجة أو الصيد، قدم له نصائح تقنية ذكية واحترافية تشجعه على التطور.
+                        - استخدم الإيموجيات الهادئة والداعمة بذكاء (✨, 🚀, 🤝, 💡).` 
                     },
                     { role: "user", content: text }
                 ]
